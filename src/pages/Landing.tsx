@@ -1,7 +1,4 @@
-import { MessageBox } from 'react-chat-elements';
-import { SideBar } from 'react-chat-elements';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import Login from './Login';
 import { History } from 'history';
 
 interface Props {
