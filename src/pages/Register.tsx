@@ -1,21 +1,19 @@
 import { Form, Container, Row, Col, Button } from 'react-bootstrap';
 // import { History } from 'history';
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { History } from 'history';
+import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 
-interface Props {
-  // history: History;
-  // mode: string;
-  // mode: Mode;
-  mode: 'login' | 'register';
-}
 interface FormFields {
   email: string;
   password: string;
 }
+interface Props {
+  history: History;
+}
 
-const LoginRegister = ({ mode }: Props) => {
-  const history = useHistory();
+const Register = ({ history }: Props) => {
   const [fields, setFields] = useState<FormFields>({ email: '', password: '' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,23 +22,40 @@ const LoginRegister = ({ mode }: Props) => {
     setFields({ ...fields, [key]: value });
   };
 
-  const handleSubmit = async (e: React.SyntheticEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    console.log('fuck you');
     e.preventDefault();
-    const resp = await fetch(process.env.REACT_APP_API_URL + '/login', {
-      method: 'POST',
-      body: JSON.stringify(fields),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-    });
+    try {
+      const resp = await fetch(process.env.REACT_APP_API_URL + `/register`, {
+        method: 'POST',
+        body: JSON.stringify(fields),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await resp.json();
+      console.log(data);
+      if (resp.ok) {
+        toast('Yay! Youre registered, redirecting to login');
+        setTimeout(() => {
+          history.push('/login');
+        }, 2000);
+      } else {
+        toast.error('Something went wrong! redirecting to landing');
+        setTimeout(() => {
+          history.push('/landing');
+        }, 2000);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <Container fluid style={{ background: 'teal' }}>
       <Row className='justify-content-center align-items-center min-vh-100'>
         <Col sm={6}>
-          <h4 className='mb-4 text-white'>Please {`${mode}`}</h4>
+          <h4 className='mb-4 text-white'>Please Register</h4>
           <div className='d-flex flex-column'>
             <Form onSubmit={handleSubmit}>
               <Form.Group controlId='formBasicEmail'>
@@ -65,19 +80,19 @@ const LoginRegister = ({ mode }: Props) => {
 
               <Button
                 variant='warning'
-                onClick={() => history.push(`/login`)}
                 className='rounded-pill mt-3'
                 type='submit'
               >
                 {' '}
-                {mode === 'login' ? 'Login' : 'Register'}
+                Register
               </Button>
             </Form>
           </div>
         </Col>
+        <ToastContainer />
       </Row>
     </Container>
   );
 };
 
-export default LoginRegister;
+export default Register;
