@@ -37,8 +37,8 @@ const Login = ({ history }: Props) => {
       });
 
       if (resp.ok) {
-        // let user = await resp.json();
-        // console.log(user);
+        let user = await resp.json();
+        console.log(user);
         // localStorage.setItem('user_logged_in', user._id);
         toast('Yay! Redirecting to wyou chats!');
         setTimeout(() => {
