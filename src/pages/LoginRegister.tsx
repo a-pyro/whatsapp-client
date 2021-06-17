@@ -5,7 +5,9 @@ import { useHistory } from 'react-router-dom';
 
 interface Props {
   // history: History;
-  mode: string;
+  // mode: string;
+  // mode: Mode;
+  mode: 'login' | 'register';
 }
 interface FormFields {
   email: string;
@@ -38,9 +40,7 @@ const LoginRegister = ({ mode }: Props) => {
     <Container fluid style={{ background: 'teal' }}>
       <Row className='justify-content-center align-items-center min-vh-100'>
         <Col sm={6}>
-          <h4 className='mb-4 text-white'>
-            Please {mode === 'login' ? 'login' : 'register'}
-          </h4>
+          <h4 className='mb-4 text-white'>Please {`${mode}`}</h4>
           <div className='d-flex flex-column'>
             <Form onSubmit={handleSubmit}>
               <Form.Group controlId='formBasicEmail'>
