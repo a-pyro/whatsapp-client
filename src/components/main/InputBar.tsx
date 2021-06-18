@@ -15,10 +15,12 @@ const InputBar = ({ setMsgTxt }: Props) => {
   };
 
   return (
-    <Form onChange={handleSubmit} className=''>
+    <Form onSubmit={handleSubmit} className=''>
       <Form.Group className='d-flex'>
         <Form.Control
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => {
+            setText(e.target.value);
+          }}
           type='text'
           value={text}
           className='rounded-pill w-100'

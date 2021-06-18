@@ -16,8 +16,10 @@ interface Props {
 const Main = ({ setMsgTxt, msgHistory }: Props) => {
   return (
     <Col style={{ height: '100%' }} sm={8} className='bg-primary'>
-      <MsgList msgHistory={msgHistory} />
-      <InputBar setMsgTxt={setMsgTxt} />
+      <div className='d-flex flex-column'>
+        <MsgList msgHistory={msgHistory} />
+        <InputBar setMsgTxt={setMsgTxt} />
+      </div>
     </Col>
   );
 };

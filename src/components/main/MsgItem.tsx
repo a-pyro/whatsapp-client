@@ -19,11 +19,9 @@ const MsgItem = ({ text, updatedAt, createdAt, senderId }: Props) => {
     <Container>
       <TypeOfMessage>
         {text}
-        {/* <Timestamp>
-          {createdAt
-            ? moment(createdAt.toDate().getTime()).format('LT')
-            : '...'}
-        </Timestamp> */}
+        <Timestamp>
+          {createdAt ? moment(createdAt).format('LT') : '...'}
+        </Timestamp>
       </TypeOfMessage>
     </Container>
   );
