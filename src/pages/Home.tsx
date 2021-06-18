@@ -21,7 +21,7 @@ const Home = () => {
 
   return (
     <Container fluid>
-      <Row className='vh-100'>
+      <Row noGutters className='vh-100'>
         <Side />
         <Main />
       </Row>
