@@ -1,17 +1,20 @@
 import styled from "styled-components";
 import moment from "moment";
 
-const MsgItem = ({ message }: any) => {
+const MsgItem = ({ user, message, createdAt }: any) => {
   const userLoggedIn = localStorage.getItem("user_logged_in");
+  console.log(userLoggedIn);
 
-  const TypeOfMessage = message.senderId === userLoggedIn ? Sender : Receiver;
+  const TypeOfMessage = user === userLoggedIn ? Sender : Receiver;
 
   return (
     <Container>
       <TypeOfMessage>
         {message.text}
         <Timestamp>
-          {message.createdAt ? moment(message.createdAt).format("LT") : "..."}
+          {createdAt
+            ? moment(createdAt.toDate().getTime()).format("LT")
+            : "..."}
         </Timestamp>
       </TypeOfMessage>
     </Container>
