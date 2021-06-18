@@ -1,10 +1,20 @@
 import { Col } from 'react-bootstrap';
 import ChatList from './ChatList';
+import React from 'react';
 
-const Side = () => {
+interface Msg {
+  text: string;
+  createdAt: string;
+  updatedAt: string;
+  senderId: string;
+}
+interface Props {
+  setMsgHistory: React.Dispatch<React.SetStateAction<Msg[]>>;
+}
+const Side = ({ setMsgHistory }: Props) => {
   return (
     <Col style={{ height: '100%' }} sm={4} className='bg-info px-0'>
-      <ChatList />
+      <ChatList setMsgHistory={setMsgHistory} />
     </Col>
   );
 };

@@ -12,7 +12,18 @@ interface User {
   updatedAt: string;
   _id: string;
 }
-const ChatList = () => {
+
+interface Msg {
+  text: string;
+  createdAt: string;
+  updatedAt: string;
+  senderId: string;
+}
+interface Props {
+  setMsgHistory: React.Dispatch<React.SetStateAction<Msg[]>>;
+}
+
+const ChatList = ({ setMsgHistory }: Props) => {
   const [rooms, setRooms] = useState([] as Room[]);
 
   useEffect(() => {
@@ -28,7 +39,7 @@ const ChatList = () => {
   return (
     <ListGroup style={{ height: '100%', overflow: 'auto' }}>
       {rooms.map((room: Room) => (
-        <ChatListItem key={room._id} {...room} />
+        <ChatListItem key={room._id} {...room} setMsgHistory={setMsgHistory} />
       ))}
     </ListGroup>
   );

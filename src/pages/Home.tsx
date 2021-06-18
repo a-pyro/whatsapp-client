@@ -8,9 +8,16 @@ const ENDPOINT = process.env.REACT_APP_API_URL;
 
 const socket = io(ENDPOINT!, { transports: ['websocket'] });
 
+interface Msg {
+  text: string;
+  createdAt: string;
+  updatedAt: string;
+  senderId: string;
+}
+
 const Home = () => {
   const [user, setUser] = useState(null);
-  const [msgHistory, setMsgHistory] = useState([]);
+  const [msgHistory, setMsgHistory] = useState([] as Msg[]);
   const [msgTxt, setMsgTxt] = useState('');
 
   //fetch users info
@@ -29,8 +36,8 @@ const Home = () => {
   return (
     <Container fluid>
       <Row noGutters className='vh-100'>
-        <Side />
-        <Main setMsgTxt={setMsgTxt} />
+        <Side setMsgHistory={setMsgHistory} />
+        <Main setMsgTxt={setMsgTxt} msgHistory={msgHistory} />
       </Row>
     </Container>
   );

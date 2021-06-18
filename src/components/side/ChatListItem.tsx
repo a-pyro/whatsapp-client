@@ -8,11 +8,19 @@ interface User {
   updatedAt: string;
   _id: string;
 }
+interface Msg {
+  text: string;
+  createdAt: string;
+  updatedAt: string;
+  senderId: string;
+}
 interface Props {
   usersId: User[];
   _id: string;
+
+  setMsgHistory: React.Dispatch<React.SetStateAction<Msg[]>>;
 }
-const ChatListItem = ({ _id, usersId }: Props) => {
+const ChatListItem = ({ _id, usersId, setMsgHistory }: Props) => {
   const [selected, setSelected] = useState('');
 
   const fetchMessages = async (roomId: string) => {
@@ -22,15 +30,16 @@ const ChatListItem = ({ _id, usersId }: Props) => {
         { credentials: 'include' }
       );
       const messages = await resp.json();
+      console.log(messages);
       setSelected(roomId);
-      //setMessages
+      setMsgHistory(messages);
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    // fetchMessages()
+    fetchMessages(_id);
   };
   const recieverEmail = usersId.find(
     (u) => u._id !== localStorage.getItem('user_logged_in')
@@ -38,7 +47,11 @@ const ChatListItem = ({ _id, usersId }: Props) => {
   console.log(recieverEmail);
   return (
     // className => selected === roomId ? 'selected' : ''
-    <ListGroup.Item style={{ cursor: 'pointer' }} onClick={handleClick}>
+    <ListGroup.Item
+      className={selected === _id ? 'bg-secondary' : ''}
+      style={{ cursor: 'pointer' }}
+      onClick={handleClick}
+    >
       <div className='d-flex'>
         <Image
           roundedCircle

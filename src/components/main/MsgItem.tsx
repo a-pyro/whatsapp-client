@@ -1,21 +1,29 @@
-import styled from "styled-components";
-import moment from "moment";
+import styled from 'styled-components';
+import moment from 'moment';
 
-const MsgItem = ({ user, message, createdAt }: any) => {
-  const userLoggedIn = localStorage.getItem("user_logged_in");
+interface Props {
+  text: string;
+  createdAt: string;
+  updatedAt: string;
+  senderId: string;
+}
+
+// const MsgItem = ({ user, message, createdAt }: any) => {
+const MsgItem = ({ text, updatedAt, createdAt, senderId }: Props) => {
+  const userLoggedIn = localStorage.getItem('user_logged_in');
   console.log(userLoggedIn);
 
-  const TypeOfMessage = user === userLoggedIn ? Sender : Receiver;
+  const TypeOfMessage = senderId === userLoggedIn ? Sender : Receiver;
 
   return (
     <Container>
       <TypeOfMessage>
-        {message.text}
-        <Timestamp>
+        {text}
+        {/* <Timestamp>
           {createdAt
-            ? moment(createdAt.toDate().getTime()).format("LT")
-            : "..."}
-        </Timestamp>
+            ? moment(createdAt.toDate().getTime()).format('LT')
+            : '...'}
+        </Timestamp> */}
       </TypeOfMessage>
     </Container>
   );
