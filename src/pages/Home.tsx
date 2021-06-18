@@ -11,6 +11,7 @@ const socket = io(ENDPOINT!, { transports: ['websocket'] });
 const Home = () => {
   const [user, setUser] = useState(null);
   const [msgHistory, setMsgHistory] = useState([]);
+  const [msgTxt, setMsgTxt] = useState('');
 
   //fetch users info
   useEffect(() => {
@@ -29,7 +30,7 @@ const Home = () => {
     <Container fluid>
       <Row noGutters className='vh-100'>
         <Side />
-        <Main />
+        <Main setMsgTxt={setMsgTxt} />
       </Row>
     </Container>
   );
