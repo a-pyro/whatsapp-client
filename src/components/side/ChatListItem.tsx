@@ -9,13 +9,15 @@ interface Props {
   body: string;
 }
 const ChatListItem = ({ userId, id, title, body }: Props) => {
-  const fetchMessages = async (roomId: number) => {
+  const [selected, setSelected] = useState('');
+  const fetchMessages = async (roomId: string) => {
     try {
       const resp = await fetch(
         `${process.env.REACT_APP_API_URL}/rooms/${roomId}/history`,
         { credentials: 'include' }
       );
       const messages = await resp.json();
+      setSelected(roomId);
       //setMessages
     } catch (error) {
       console.log(error);
@@ -27,6 +29,7 @@ const ChatListItem = ({ userId, id, title, body }: Props) => {
   };
 
   return (
+    // className => selected === roomId ? 'selected' : ''
     <ListGroup.Item style={{ cursor: 'pointer' }} onClick={handleClick}>
       <div className='d-flex'>
         <Image
