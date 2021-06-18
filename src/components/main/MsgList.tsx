@@ -1,5 +1,5 @@
 const MsgList = () => {
-  return <div></div>;
+  return <div style={{ overflow: 'auto' }}></div>;
 };
 
 export default MsgList;

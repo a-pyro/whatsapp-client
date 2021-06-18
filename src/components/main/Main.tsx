@@ -2,7 +2,7 @@ import { Col } from 'react-bootstrap';
 
 const Main = () => {
   return (
-    <Col sm={8} className='bg-primary'>
+    <Col style={{ height: '100%' }} sm={8} className='bg-primary'>
       Main
     </Col>
   );

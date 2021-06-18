@@ -20,8 +20,8 @@ const Home = () => {
   }, []);
 
   return (
-    <Container>
-      <Row className='mt-5'>
+    <Container fluid>
+      <Row className='vh-100'>
         <Side />
         <Main />
       </Row>

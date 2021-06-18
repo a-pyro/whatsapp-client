@@ -1,5 +1,5 @@
 const ChatList = () => {
-  return <div></div>;
+  return <div style={{ overflow: 'auto' }}></div>;
 };
 
 export default ChatList;
