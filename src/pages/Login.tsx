@@ -35,12 +35,11 @@ const Login = ({ history }: Props) => {
         },
         credentials: 'include',
       });
+      console.log(resp);
 
       if (resp.ok) {
-        let user = await resp.json();
-        console.log(user);
         // localStorage.setItem('user_logged_in', user._id);
-        toast('Yay! Redirecting to wyou chats!');
+        toast('Yay! Redirecting to you chats!');
         setTimeout(() => {
           history.push('/home');
         }, 2000);
