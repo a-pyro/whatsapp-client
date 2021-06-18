@@ -5,6 +5,7 @@ import Main from '../components/main/Main';
 
 const Home = () => {
   const [user, setUser] = useState(null);
+  const [msgHistory, setMsgHistory] = useState([]);
 
   //fetch users info
   useEffect(() => {
