@@ -2,14 +2,19 @@ import React, { useState } from 'react';
 import { Image } from 'react-bootstrap';
 import { ListGroup } from 'react-bootstrap';
 
-interface Props {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
+interface User {
+  createdAt: string;
+  email: string;
+  updatedAt: string;
+  _id: string;
 }
-const ChatListItem = ({ userId, id, title, body }: Props) => {
+interface Props {
+  usersId: User[];
+  _id: string;
+}
+const ChatListItem = ({ _id, usersId }: Props) => {
   const [selected, setSelected] = useState('');
+
   const fetchMessages = async (roomId: string) => {
     try {
       const resp = await fetch(
@@ -27,7 +32,10 @@ const ChatListItem = ({ userId, id, title, body }: Props) => {
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     // fetchMessages()
   };
-
+  const recieverEmail = usersId.find(
+    (u) => u._id !== localStorage.getItem('user_logged_in')
+  )?.email;
+  console.log(recieverEmail);
   return (
     // className => selected === roomId ? 'selected' : ''
     <ListGroup.Item style={{ cursor: 'pointer' }} onClick={handleClick}>
@@ -38,7 +46,7 @@ const ChatListItem = ({ userId, id, title, body }: Props) => {
           src='/assets/avatar.jpeg'
         />
         <div className='ms-3'>
-          <p className='mb-0'>Name of the chat</p>
+          <p className='mb-0'>{recieverEmail}</p>
           <p>last message</p>
         </div>
         <div className='ms-auto'>
